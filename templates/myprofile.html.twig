@@ -1,0 +1,36 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+    <div class="sm:w-3/5 w-4/5 mx-auto">
+        <h1 class="pt-24 sm:text-4xl md:text-4xl text-4xl font-bold text-center">
+           Actors rated by {{ user.email }}
+        </h1>
+    {% for rating in ratings %}
+        
+
+        {% set result = rating.rating*20 %}
+
+        <div class="sm:w-1/5 w-1/5 lg:ml-60 md:ml-5 text-center">    
+            <div class="containerdiv mt-20">
+                <img class="stars" src="https://image.ibb.co/jpMUXa/stars_blank.png" alt="img">
+
+                <div class="cornerimage" style="width:{{ result }}%">
+                    <img class="stars" src="https://image.ibb.co/caxgdF/stars_full.png" alt="">
+                </div> 
+
+                <a href="/actors/{{ rating.Actorid.id }}" class="pt-3">
+                    {{ rating.Actorid.name }}
+                </a>
+            </div>        
+        </div>
+        <span>
+
+
+    {% endfor %}
+        
+
+
+
+    </div>
+{% endblock %}
+    

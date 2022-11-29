@@ -1,0 +1,94 @@
+{% extends "./base.html.twig" %}
+
+{% block body %}
+    <div class="sm:w-3/5 w-4/5 mx-auto">
+        <h1 class="pt-20 sm:text-5xl md:text-7xl text-4xl font-bold text-center">
+            {{ actor.Name }}
+        </h1>
+
+        <div class="py-10 text-center">
+            <div class="inline-block sm:pt-1">
+
+            </div>
+        </div>
+
+        <img
+            src="{{ actor.imagePath }}"
+            class="show rounded-xl shadow-xl"
+        />
+        {% if rating != 0 %}
+            {% set totalRating = 0 %}
+            {% set ratingLength = 0 %}
+            
+            {% for rating in rating %}
+                {% set totalRating = totalRating + rating.rating %}
+                {% set ratingLength = ratingLength + 1 %}
+            {% endfor %}
+
+            {% set result = (totalRating/ratingLength)*20 %}
+        
+
+        <p class="text-xl py-6">
+            <div class="containerdiv">
+            <img class="stars" src="https://image.ibb.co/jpMUXa/stars_blank.png" alt="img">
+                <div class="cornerimage" style="width:{{ result }}%">
+                <img class="stars" src="https://image.ibb.co/caxgdF/stars_full.png" alt="">
+                </div>
+            </div>
+        </p>
+        {% endif %}
+
+        {% if app.user %}
+            <div class="py-10 text-center">
+                {{ form_start(form) }}
+
+                    {{ form_widget(form) }}
+                    <button    
+                        type="submit"
+                        class="uppercase mt-2 bg-green-500 text-gray-100 text-sm font-extrabold py-2 px-4 rounded-3xl">
+                        RATE
+                    </button>
+
+                {{ form_end(form) }}
+            </div>
+        {% endif %}
+
+        {% if movies %}
+            <div class="ml-48 pt-4 my-4">
+                Played in:
+
+                {% for movie in movies %}
+                        <li class="py-2">
+                            <a href="/movies/{{ movie.movieID.id }}">
+                                {{ movie.movieID.title }}
+                            </a>             
+                        </li>
+                {% endfor %}
+                
+            </div>
+        {% endif %}
+
+        {% if app.user %}
+            {% if app.user.id == 1 %}
+            <div style="clear:both">
+
+                <p class="py-4">
+                    <a 
+                        href="/movies/edita/{{ actor.id }}"
+                        class="bg-green-500 font-bold py-2 px-4 rounded transition-all hover:bg-green-300 ml-48">
+                            Edit Actor
+                    </a>
+
+                    <a 
+                        href="/movies/deleteA/{{ actor.id }}"
+                        class="bg-red-500 font-bold py-2 px-4 ml-6 rounded transition-all hover:bg-red-300">
+                            Delete Actor
+                    </a>
+                </p>
+            </div>
+            {% endif %}
+        {% endif %}
+
+
+    </div>
+{% endblock %}

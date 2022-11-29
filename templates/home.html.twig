@@ -1,0 +1,48 @@
+{% extends "./base.html.twig" %}
+
+{% block body %}
+    <div class="w-4/5 m-auto text-center">
+        <div class="py-8 border-b">
+            <h1 class="text-4xl pt-11 pb-8">
+                Welcome!
+                <br> Right now we've got {{ movies|length }} movies and {{ actors|length }} actors
+            </h1>
+
+        </div>
+    </div>
+
+        <div class="md:grid lg:grid-cols-2 gap-20 w-4/5 mx-auto py-2 ">
+            
+            {% for actor in actors|slice(0, 1) %}
+                <div class="text-center pt-8 pb-4">
+                    <a href="/actors">
+                        <img
+                            src="{{ actor.imagePath }}"
+                            alt=""
+                            class="homeimg shadow-2xl rounded-md p-6 my-8"
+                        />
+                    </a>
+                    <a href="/actors" class="uppercase border border-gray-700 text-neutral-500 text-lg py-4 px-12 rounded transition transition-all hover:bg-neutral-800 hover:text-white">
+                        Actors
+                    </a>
+                </div>
+            {% endfor %}
+
+            {% for movie in movies|slice(0, 1) %}
+                <div class="text-center pt-8 pb-4">
+                    <a href="/movies">
+                        <img
+                            src="{{ movie.imagePath }}"
+                            alt=""
+                            class="homeimg shadow-2xl rounded-md p-6 my-8"
+                        />
+                    <a/>
+                        <a href="/movies" class="uppercase border border-gray-700 text-neutral-500 text-lg py-4 px-12 rounded transition transition-all hover:bg-neutral-800 hover:text-white">
+                            Movies
+                        </a>
+                    
+                </div>
+            {% endfor %}
+ 
+    </div>
+{% endblock %}

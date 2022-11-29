@@ -1,0 +1,48 @@
+{% extends "./base.html.twig" %}
+
+{% block body %}
+     <div class="w-4/5 m-auto text-center">
+        <div class="py-8 border-b">
+            <h1 class="text-4xl mt-12 pb-8">
+                Check our {{ movies|length }} movies
+            </h1>
+
+        </div>
+    </div>
+        
+    {% if app.user %}
+        {% if app.user.id == 1 %}
+            <div class="mx-auto w-4/5 my-8">
+                <a href="/movies/create" class="uppercase border border-gray-500 text-lg   
+                py-4 px-6 rounded transition transition-all bg-gray-800 text-white hover:bg-white hover:text-gray-800">
+                    Create New movie
+                </a>
+            </div>
+        {% endif %}
+    {% endif %}
+    
+    
+    <div class="md:grid lg:grid-cols-3 gap-20 w-4/5 mx-auto py-12 ">
+        {% for movie in movies %}
+            <div class="text-center pt-4 pb-4">
+                <img
+                    src="{{ movie.imagePath }}"
+                    alt=""
+                    class="menuimg shadow-xl rounded-md"
+                />
+
+                <h2 class="text-gray-700 font-bold text-3xl py-2">
+                    {{ movie.title }}
+                </h2>
+
+                <p class="text-base text-gray-700 pt-4 pb-2 leading-8 font-light">
+
+                </p>
+
+                <a href="/movies/{{ movie.id }}" class="uppercase border border-gray-500 text-neutral-600 mt-2 text-lg py-4 px-12 rounded transition transition-all hover:bg-neutral-800 hover:text-white">
+                    Keep Reading
+                </a>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}
